@@ -361,6 +361,13 @@ VkPresentModeKHR ImguiVulkanHelper::chooseSwapPresentMode(const std::vector<VkPr
             return availablePresentMode;
         }
     }
+    for (const auto& availablePresentMode : availablePresentModes) {
+        if (availablePresentMode == VK_PRESENT_MODE_IMMEDIATE_KHR) {
+            fprintf(stdout, "VK_PRESENT_MODE_IMMEDIATE_KHR is chosen as the present mode.\n");
+            return availablePresentMode;
+        }
+    }
+
     fprintf(stdout, "VK_PRESENT_MODE_FIFO_KHR is chosen as the present mode.\n");
     return VK_PRESENT_MODE_FIFO_KHR;
 #endif
