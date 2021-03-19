@@ -17,7 +17,16 @@ SRCS := \
     $(MAIN_SRCS)
 OBJS := $(patsubst $(SRC_DIR)%.cpp,$(OBJ_DIR)%.o,$(SRCS))
 
-CFLAGS = -g -I$(SRC_DIR) -I$(SRC_DIR)/imgui -I$(SRC_DIR)/imgui_impl
+CC = g++
+CFLAGS_DBG = -DDEBUG -g -I$(SRC_DIR) -I$(SRC_DIR)/imgui -I$(SRC_DIR)/imgui_impl
+CFLAGS_REL = -O2 -I$(SRC_DIR) -I$(SRC_DIR)/imgui -I$(SRC_DIR)/imgui_impl
+ifeq ($(build), debug)
+    CFLAGS := $(CFLAGS_DBG)
+endif
+ifeq ($(build), release)
+    CFLAGS := $(CFLAGS_REL)
+endif
+CFLAGS ?= $(CFLAGS_DBG)
 LDFLAGS = -lvulkan -lglfw
 TARGET = nanoplayer
 
@@ -25,10 +34,10 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@if [ ! -d "$(shell dirname $@)" ]; then  \
 		mkdir -p "$(shell dirname $@)";  \
 	fi
-	g++ -c $(CFLAGS) -o $@ $^
+	$(CC) -c $(CFLAGS) -o $@ $^
 
-nanoplayer: $(OBJS)
-	g++ -o $@ $^ $(LDFLAGS)
+$(TARGET): $(OBJS)
+	$(CC) -o $@ $^ $(LDFLAGS)
 
 .PHONY: clean
 
