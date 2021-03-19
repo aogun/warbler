@@ -17,9 +17,10 @@
 
 #ifdef DEBUG
 const std::vector<const char*> validationLayersRequired = {
-#ifdef WINDOWS
-    "VK_LAYER_KHRONOS_validation"
-#endif
+    "VK_LAYER_LUNARG_parameter_validation",
+    "VK_LAYER_LUNARG_object_tracker",
+    "VK_LAYER_LUNARG_core_validation",
+    "VK_LAYER_LUNARG_standard_validation"
 };
 #else
 const std::vector<const char*> validationLayersRequired;
@@ -233,6 +234,7 @@ bool ImguiVulkanHelper::createInstance(const char *app_name, uint32_t app_versio
     if (validationLayersRequired.size() > 0) {
         createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayersRequired.size());
         createInfo.ppEnabledLayerNames = validationLayersRequired.data();
+        // This debugCreateInfo1 is for debugging vkCreateInstance and vkDestroyInstance
         createInfo.pNext = (VkDebugUtilsMessengerCreateInfoEXT *)&debugCreateInfo1;
         fprintf(stdout, "Create instance: validation layer enabled.\n");
     } else {
@@ -246,7 +248,7 @@ bool ImguiVulkanHelper::createInstance(const char *app_name, uint32_t app_versio
         return false;
     }
 
-#if 0
+    // This is to use our debug callback when validation layer outputs
     auto func = (PFN_vkCreateDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
     if (func != nullptr) {
         ret = func(instance, &debugCreateInfo2, nullptr, &debugMessenger);
@@ -258,7 +260,6 @@ bool ImguiVulkanHelper::createInstance(const char *app_name, uint32_t app_versio
         fprintf(stderr, "The function pointer: vkCreateDebugUtilsMessengerEXT is not found.\n");
         return false;
     }
-#endif
 
     return true;
 }
