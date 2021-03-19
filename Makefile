@@ -19,7 +19,7 @@ OBJS := $(patsubst $(SRC_DIR)%.cpp,$(OBJ_DIR)%.o,$(SRCS))
 
 CC = g++
 CFLAGS_DBG = -Wall -DDEBUG -g -I$(SRC_DIR) -I$(SRC_DIR)/imgui -I$(SRC_DIR)/imgui_impl
-CFLAGS_REL = -O2 -I$(SRC_DIR) -I$(SRC_DIR)/imgui -I$(SRC_DIR)/imgui_impl
+CFLAGS_REL = -DVSYNC -O2 -I$(SRC_DIR) -I$(SRC_DIR)/imgui -I$(SRC_DIR)/imgui_impl
 ifeq ($(build), debug)
     CFLAGS := $(CFLAGS_DBG)
 endif

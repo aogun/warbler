@@ -352,13 +352,16 @@ VkSurfaceFormatKHR ImguiVulkanHelper::chooseSwapSurfaceFormat(const std::vector<
 VkPresentModeKHR ImguiVulkanHelper::chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes)
 {
 #ifdef VSYNC
+        fprintf(stdout, "VSYNC is enabled. VK_PRESENT_MODE_FIFO_KHR is chosen as the present mode.\n");
         return VK_PRESENT_MODE_FIFO_KHR;
 #else
     for (const auto& availablePresentMode : availablePresentModes) {
         if (availablePresentMode == VK_PRESENT_MODE_MAILBOX_KHR) {
+            fprintf(stdout, "VK_PRESENT_MODE_MAILBOX_KHR is chosen as the present mode.\n");
             return availablePresentMode;
         }
     }
+    fprintf(stdout, "VK_PRESENT_MODE_FIFO_KHR is chosen as the present mode.\n");
     return VK_PRESENT_MODE_FIFO_KHR;
 #endif
 }
