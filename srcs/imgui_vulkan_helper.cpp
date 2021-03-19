@@ -249,16 +249,18 @@ bool ImguiVulkanHelper::createInstance(const char *app_name, uint32_t app_versio
     }
 
     // This is to use our debug callback when validation layer outputs
-    auto func = (PFN_vkCreateDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
-    if (func != nullptr) {
-        ret = func(instance, &debugCreateInfo2, nullptr, &debugMessenger);
-        if (ret != VK_SUCCESS) {
-            fprintf(stderr, "Create debug utils messenger failed: %d\n", ret);
+    if (validationLayersRequired.size() > 0) {
+        auto func = (PFN_vkCreateDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
+        if (func != nullptr) {
+            ret = func(instance, &debugCreateInfo2, nullptr, &debugMessenger);
+            if (ret != VK_SUCCESS) {
+                fprintf(stderr, "Create debug utils messenger failed: %d\n", ret);
+                return false;
+            }
+        } else {
+            fprintf(stderr, "The function pointer: vkCreateDebugUtilsMessengerEXT is not found.\n");
             return false;
         }
-    } else {
-        fprintf(stderr, "The function pointer: vkCreateDebugUtilsMessengerEXT is not found.\n");
-        return false;
     }
 
     return true;
