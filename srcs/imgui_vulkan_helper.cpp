@@ -20,9 +20,6 @@ const std::vector<const char*> validationLayersRequired = {
 #ifdef WINDOWS
     "VK_LAYER_KHRONOS_validation"
 #endif
-#ifdef RPI4B
-    // TODO
-#endif
 };
 #else
 const std::vector<const char*> validationLayersRequired;
@@ -249,6 +246,7 @@ bool ImguiVulkanHelper::createInstance(const char *app_name, uint32_t app_versio
         return false;
     }
 
+#if 0
     auto func = (PFN_vkCreateDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
     if (func != nullptr) {
         ret = func(instance, &debugCreateInfo2, nullptr, &debugMessenger);
@@ -260,6 +258,7 @@ bool ImguiVulkanHelper::createInstance(const char *app_name, uint32_t app_versio
         fprintf(stderr, "The function pointer: vkCreateDebugUtilsMessengerEXT is not found.\n");
         return false;
     }
+#endif
 
     return true;
 }

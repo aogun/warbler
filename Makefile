@@ -17,7 +17,7 @@ SRCS := \
     $(MAIN_SRCS)
 OBJS := $(patsubst $(SRC_DIR)%.cpp,$(OBJ_DIR)%.o,$(SRCS))
 
-CFLAGS = -O2 -I$(SRC_DIR) -I$(SRC_DIR)/imgui -I$(SRC_DIR)/imgui_impl
+CFLAGS = -g -I$(SRC_DIR) -I$(SRC_DIR)/imgui -I$(SRC_DIR)/imgui_impl
 LDFLAGS = -lvulkan -lglfw
 TARGET = nanoplayer
 

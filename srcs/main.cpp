@@ -5,8 +5,8 @@
 
 #define APP_NAME            "NAS Backup"
 #define APP_VERSION         VK_MAKE_VERSION(0, 1, 0)
-#define WIDTH               800
-#define HEIGHT              480
+#define WIDTH               1920
+#define HEIGHT              1080
 #define PATH_BUF_LEN        4096
 #define SPACING             10
 #define FONT_NORMAL         22
@@ -101,6 +101,7 @@ int main(int, char**)
         float push_input_width = input_text_dimension.x+ yesno_dimension.x + style.ItemInnerSpacing.x * 4;
 
         ImGui::PushItemWidth(-push_input_width);
+        ImGui::InputText("Photo hash file", photo_hash_file, sizeof(photo_hash_file));
         ImGui::SameLine();
         ImGui::SetCursorPosX(yesno_pos);
         if (photo_hash_valid)
@@ -112,6 +113,7 @@ int main(int, char**)
                         ImVec2(TEX_NO_UL_X / tex_yesno_width, TEX_NO_UL_Y / tex_yesno_height),
                         ImVec2(TEX_NO_RB_X / tex_yesno_width, TEX_NO_RB_Y / tex_yesno_height));
 
+        ImGui::InputText("Video hash file", video_hash_file, sizeof(video_hash_file));
         ImGui::SameLine();
         ImGui::SetCursorPosX(yesno_pos);
         if (video_hash_valid)
@@ -123,6 +125,7 @@ int main(int, char**)
                         ImVec2(TEX_NO_UL_X / tex_yesno_width, TEX_NO_UL_Y / tex_yesno_height),
                         ImVec2(TEX_NO_RB_X / tex_yesno_width, TEX_NO_RB_Y / tex_yesno_height));
 
+        ImGui::InputText("Import directory", import_dir, sizeof(import_dir));
         ImGui::SameLine();
         ImGui::SetCursorPosX(yesno_pos);
         if (import_dir_valid)
@@ -134,6 +137,7 @@ int main(int, char**)
                          ImVec2(TEX_NO_UL_X / tex_yesno_width, TEX_NO_UL_Y / tex_yesno_height),
                          ImVec2(TEX_NO_RB_X / tex_yesno_width, TEX_NO_RB_Y / tex_yesno_height));
 
+        ImGui::InputText("Output directory", output_dir, sizeof(output_dir));
         ImGui::SameLine();
         ImGui::SetCursorPosX(yesno_pos);
         if (output_dir_valid)
