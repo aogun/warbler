@@ -27,7 +27,7 @@ ifeq ($(build), release)
 endif
 CFLAGS ?= $(CFLAGS_DBG)
 LDFLAGS = -lvulkan -lglfw
-TARGET = nanoplayer
+TARGET = warbler
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@if [ ! -d "$(shell dirname $@)" ]; then  \
