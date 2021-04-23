@@ -1,4 +1,4 @@
-# warbler
+# Warbler
 
 Build:
 - sudo apt install libglfw3 libglfw3-dev
