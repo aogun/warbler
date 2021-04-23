@@ -8,7 +8,6 @@ IMGUI_IMPL_SRCS := \
     $(SRC_DIR)/imgui_impl/imgui_impl_glfw.cpp \
     $(SRC_DIR)/imgui_impl/imgui_impl_vulkan.cpp
 MAIN_SRCS := \
-    $(SRC_DIR)/flying_widgets.cpp \
     $(SRC_DIR)/imgui_vulkan_helper.cpp \
     $(SRC_DIR)/main.cpp
 SRCS := \

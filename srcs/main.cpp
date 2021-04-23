@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "imgui_vulkan_helper.h"
-#include "flying_widgets.h"
 
 #define APP_NAME            "NAS Backup"
 #define APP_VERSION         VK_MAKE_VERSION(0, 1, 0)
@@ -149,8 +148,6 @@ int main(int, char**)
                         ImVec2(TEX_NO_UL_X / tex_yesno_width, TEX_NO_UL_Y / tex_yesno_height),
                         ImVec2(TEX_NO_RB_X / tex_yesno_width, TEX_NO_RB_Y / tex_yesno_height));
         ImGui::PopItemWidth();
-
-        ImGui::MWProgressBar(20, 100, ImVec2(window_width - SPACING, 10), ImVec2(SPACING, SPACING));
 
         ImGui::PushFont(font_large);
         float start_btn_pos = (window_width - (ImGui::CalcTextSize("Start").x + BTN_FILL_WIDTH * 4)) * 0.5f;
